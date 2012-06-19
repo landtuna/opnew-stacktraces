@@ -1,8 +1,8 @@
 #ifndef STACKTRACE_HPP
 #define STACKTRACE_HPP
 
-#include <ostream>
+#include <cstdio>
 
-void printTrace(std::ostream& out);
+void printTrace(FILE* out);
 
 #endif // STACKTRACE_HPP

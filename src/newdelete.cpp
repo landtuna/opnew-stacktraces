@@ -1,7 +1,7 @@
 #include <exception>
 #include <new>
 #include <cstdlib>
-#include <iostream>
+#include <cstdio>
 
 #include "stacktrace.hpp"
 
@@ -12,8 +12,8 @@ void* operator new (size_t size) {
     throw std::bad_alloc();
   }
 
-  std::cout << "allocated " << size << std::endl;
-  printTrace(std::cout);
+  printf("allocated %zu\n", size);
+  printTrace(stdout);
 
   return p;
 }

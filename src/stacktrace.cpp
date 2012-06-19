@@ -1,13 +1,13 @@
 #include <cxxabi.h>
 #include <libunwind.h>
-#include <ostream>
 #include <cstdlib>
+#include <cstdio>
 #include <cstring>
 using namespace std;
 
 #include "stacktrace.hpp"
 
-void printTrace(ostream& out) {
+void printTrace(FILE* out) {
   unw_cursor_t cursor;
   unw_context_t context;
   
@@ -38,8 +38,9 @@ void printTrace(ostream& out) {
       demangled[demangledSize-1] = '\0';
     }
     
-    out << hex << demangled << "+0x" << offset << " [" << pc << "]" << dec << '\n';
+    fprintf(out, "%s+0x%lx [%lx]\n", demangled, offset, pc);
     free(demangled);
   }
-  out << endl;
+  fprintf(out, "\n");
+  fflush(out);
 }
